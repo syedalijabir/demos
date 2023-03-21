@@ -7,7 +7,7 @@ services:
     depends_on:
       - redis
     environment:
-      - REDIS_HOST=redis
+      - REDIS_URL=redis:6379/0
       - REGION=eu-west-2
   redis:
     image: redis
