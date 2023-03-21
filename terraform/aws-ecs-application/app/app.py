@@ -25,9 +25,12 @@ s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(('8.8.8.8', 80))
 server_ip_address = s.getsockname()[0]
 
-if os.environ.get("REDIS_HOST"):
+if os.environ.get("REDIS_URL"):
     # Connect to Redis
-    redis_client = redis.Redis(host=os.environ.get("REDIS_HOST"), port=6379, db=0)
+    host = os.environ.get("REDIS_URL").replace('tcp://','').split(':')[0]
+    port = os.environ.get("REDIS_URL").replace('tcp://','').split(':')[1].split('/')[0]
+    db = os.environ.get("REDIS_URL").replace('tcp://','').split(':')[1].split('/')[1]
+    redis_client = redis.Redis(host=host, port=port, db=db)
     use_redis = True
 else:
     use_redis = False
