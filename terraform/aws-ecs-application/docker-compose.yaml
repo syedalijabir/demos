@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    build: app/
+    ports:
+      - "8000:5000"
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REGION=eu-west-2
+  redis:
+    image: redis
