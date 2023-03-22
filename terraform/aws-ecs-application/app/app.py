@@ -19,7 +19,7 @@
 import os
 import socket
 import redis
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, make_response
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(('8.8.8.8', 80))
@@ -73,6 +73,11 @@ def index():
 
     # Return the generated HTML content to the client
     return html_content
+
+@app.route('/healthz')
+def healthz():
+    return make_response('Success', 200)
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")
