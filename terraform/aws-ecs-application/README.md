@@ -9,10 +9,8 @@ Application could be run locally using the docker-compose file.
 $ cd demos/tree/main/terraform/aws-ecs-application
 $ docker-compuse up --build
 ```
-
 ## Top level diagram
-![Alt text](diagrams/top-level.png?raw=true "Top Level")
-
+<img src="diagrams/top-level.png" width="600">
 
 ## Infrastructure
 Application is deployed into an AWS ECS Cluster. The Terraform files are located under `infra` directory
