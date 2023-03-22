@@ -42,17 +42,21 @@ app.request_count = 0
 @app.before_request
 def count_requests():
     app.request_count += 1
-    if use_redis:
-        redis_client.set('request_count', app.request_count)
 
 @app.route('/')
 def index():
     global server_ip_address
     if use_redis:
-        visitor_number = redis_client.get('request_count').decode()
+        if redis_client.exists('request_count'):
+            visitor_number = redis_client.get('request_count').decode()
+        else:
+            visitor_number = 0
     else:
         visitor_number = app.request_count
     message = "You are visitor number: {}".format(visitor_number)
+    # Update visitor number in redis
+    redis_client.set('request_count', int(visitor_number)+1)
+
     if os.environ.get("REGION"):
         region = "Im located in {}".format(os.environ.get("REGION"))
     else:
@@ -62,7 +66,7 @@ def index():
     html_content = render_template(
         'index.html',
         message=message,
-        source_ip=request.remote_addr,
+        source_ip=request.headers.get('X-Forwarded-For', request.remote_addr), # AWS ALB forwarded client IP address
         my_ip=server_ip_address,
         region=region
     )
