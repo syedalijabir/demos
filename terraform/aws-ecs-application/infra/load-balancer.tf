@@ -37,7 +37,6 @@ resource "aws_lb_target_group" "lb_target_group" {
 
   target_type                   = "ip"
   load_balancing_algorithm_type = "least_outstanding_requests"
-  preserve_client_ip = true
 
   tags = merge(
     local.common_tags,
