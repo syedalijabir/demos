@@ -1,13 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Web App</title>
+	<title>Sample Application</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}" sizes="50x50">
     <meta charset="UTF-8">
+	<style>
+		body {
+			background-color:rgb(230, 230, 230);
+			font-family: Arial, sans-serif;
+			text-align: center;
+			margin: 0;
+			padding: 0;
+		}
+
+		header {
+			background-color:rgb(2, 252, 56, 0.4);
+			padding: 20px;
+			text-align: center;
+		}
+
+		h1 {
+			font-size: 36px;
+			margin: 0;
+		}
+
+		.container {
+			margin: 50px auto;
+			max-width: 800px;
+			padding: 0 20px;
+		}
+
+		p {
+			font-size: 18px;
+			line-height: 1.5;
+			margin-bottom: 20px;
+		}
+	</style>
 </head>
 <body>
-    <p>Hey you.. <b>{{ source_ip }}</b></p>
-    <p>I am <b>{{ my_ip }}</b>, nice of you to come by</p>
-    <p>{{ message }}</p>
-    <p>{{ region }}</p>
+	<header>
+		<h1>Simple Web App</h1>
+	</header>
+	<div class="container">
+        <p>Hey you.. <b>{{ source_ip }}</b></p>
+        <p>I am <b>{{ my_ip }}</b>, nice of you to come by</p>
+        <p>{{ message }}</p>
+        <p>{{ region }}</p>
+	</div>
 </body>
 </html>

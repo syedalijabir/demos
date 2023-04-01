@@ -36,7 +36,7 @@ else:
     use_redis = False
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 app.request_count = 0
 
 @app.before_request
