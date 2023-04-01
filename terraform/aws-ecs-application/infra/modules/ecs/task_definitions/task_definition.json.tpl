@@ -14,10 +14,6 @@
           {
             "Name": "REDIS_URL",
             "Value": "tcp://${REDIS_ENDPOINT}:${REDIS_PORT}/0"
-          },
-          {
-            "Name": "REGION",
-            "Value": "${REGION}"
           }
         ],
         "logConfiguration": {
