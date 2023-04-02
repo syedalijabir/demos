@@ -7,7 +7,7 @@ if [[ $? -eq 0 ]]; then
   az=$(echo "$metadata" | jq '.AvailabilityZone' | tr -d '"')
   export REGION=${az}
 else
-  export REGION=local
+  export REGION=${REGION:-"local"}
 fi
 
 set -e
