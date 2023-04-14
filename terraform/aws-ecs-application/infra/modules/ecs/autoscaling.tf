@@ -1,25 +1,13 @@
-resource "aws_iam_role" "autoscaling_role" {
-  name = "${local.system_key}-autoscaling-role"
-  path = "/"
-
-  assume_role_policy = templatefile("${path.module}/ecs_policies/autoscaling_assume_policy.json.tpl", {})
-}
-
-resource "aws_iam_role_policy" "autoscaling_policy" {
-  role = aws_iam_role.autoscaling_role.id
-  policy = templatefile("${path.module}/ecs_policies/autoscaling_role_policy.json.tpl", {})
-}
-
 resource "aws_appautoscaling_target" "autoscaling_target" {
   depends_on = [
-    aws_ecs_service.one_time_secrets
+    aws_ecs_service.application
   ]
   max_capacity       = var.max_scaling_count
   min_capacity       = var.min_scaling_count
   resource_id        = "service/${aws_ecs_cluster.cluster.name}/${local.system_key}"
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
-  role_arn           = aws_iam_role.autoscaling_role.arn
+  role_arn           = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService"
 }
 
 resource "aws_appautoscaling_policy" "autoscaling_target_cpu" {
