@@ -1,5 +1,5 @@
 
-resource "aws_ecs_service" "one_time_secrets" {
+resource "aws_ecs_service" "application" {
   name            = local.system_key
   cluster         = aws_ecs_cluster.cluster.id
   task_definition = aws_ecs_task_definition.task_definition.arn
