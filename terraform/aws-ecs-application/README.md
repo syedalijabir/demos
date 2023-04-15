@@ -6,7 +6,7 @@ showing SOURCE IP address, SERVER IP address, visitor count and AWS Region the a
 
 Application could be run locally using the docker-compose file.
 ```
-$ cd demos/tree/main/terraform/aws-ecs-application
+$ cd demos/terraform/aws-ecs-application
 $ docker-compuse up --build
 ```
 ## Top level diagram
