@@ -1,6 +1,6 @@
 module "ec2_instance_2" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "4.3.0"
+  version = "5.2.1"
 
   providers =  {
     aws = aws.eu-west-2

@@ -33,3 +33,8 @@ Done playing?
 ```
 $ terraform destroy -auto-approve
 ```
+
+## Troubleshooting
+If you find `terraform apply` failing after running for a while for the first time, try running the command again.
+This happens because AWS is taking time in the background to setup core-network and core-network attachments.
+You can also try increase the timeout time for creation of core-network.
